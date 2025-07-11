@@ -22,13 +22,14 @@ ALERT_THRESHOLD = 3
 FRAME_SKIP = 2
 # DETECTION_CONFIDENCE = 0.5
 RESIZE_RATIO = 0.5
+MODEL = 'yolo11n'
 
 def main(yt_url = "https://www.youtube.com/watch?v=GJNjaRJWVP8"):
     video_path = video_downloader(yt_url)
     if video_path is None:
         return
     
-    model = torch.hub.load("ultralytics/yolov5", "yolov5s", pretrained=True)
+    model = torch.hub.load(f"ultralytics/{MODEL}", MODEL, pretrained=True)
     # model.conf = DETECTION_CONFIDENCE
     model.classes = [0]  # Only detect persons
     model.eval()
